@@ -14,4 +14,10 @@ export default defineConfig({
     include: ['tslib'],
     exclude: ['convex'],
   },
+  build: {
+    commonjsOptions: {
+      include: [/node_modules/],
+      transformMixedEsModules: true,
+    },
+  },
 })
