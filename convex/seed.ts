@@ -16,25 +16,25 @@ export const seedData = mutation({
             role: "USER",
         });
 
-        const _userL1 = await ctx.db.insert("users", {
+        await ctx.db.insert("users", {
             name: "Priya Patel",
             email: "priya.patel@company.com",
             role: "L1_ADMIN",
         });
 
-        const _userL2 = await ctx.db.insert("users", {
+        await ctx.db.insert("users", {
             name: "Amit Kumar",
             email: "amit.kumar@company.com",
             role: "L2_ADMIN",
         });
 
-        const _userL3 = await ctx.db.insert("users", {
+        await ctx.db.insert("users", {
             name: "Sneha Reddy",
             email: "sneha.reddy@company.com",
             role: "L3_ADMIN",
         });
 
-        const _userL4 = await ctx.db.insert("users", {
+        await ctx.db.insert("users", {
             name: "Vikram Singh",
             email: "vikram.singh@company.com",
             role: "L4_ADMIN",
