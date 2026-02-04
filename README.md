@@ -1,73 +1,63 @@
-# React + TypeScript + Vite
+# Expense Claim Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, four-tier expense claim approval system built with React, TypeScript, Convex, and Tailwind CSS.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Frontend:** [Your Vercel URL]
+**Backend:** https://cheerful-starfish-174.convex.cloud
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🔐 Email/password authentication
+- 📝 Employee claim submission
+- ✅ Four-tier approval workflow (L1 → L2 → L3 → L4)
+- ⚡ Real-time updates across all users
+- 🎨 Modern UI with Tailwind CSS & Shadcn UI
+- 📊 Approval timeline visualization
+- 💾 Cloud database with Convex
 
-## Expanding the ESLint configuration
+## 🏗️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend:** React 18 + TypeScript + Vite
+- **Backend:** Convex (Real-time database)
+- **UI:** Shadcn UI + Tailwind CSS
+- **Deployment:** Vercel (Frontend) + Convex Cloud (Backend)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🧪 Demo Accounts
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Employee:** rahul.sharma@company.com
+- **L1 Admin:** priya.patel@company.com
+- **L2 Admin:** amit.kumar@company.com
+- **L3 Admin:** sneha.reddy@company.com
+- **L4 Admin:** vikram.singh@company.com
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+**Password:** any value (demo mode)
+
+## 🛠️ Local Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start Convex dev server
+npx convex dev
+
+# Start Vite dev server (in another terminal)
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Visit http://localhost:5173
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📦 Deployment
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+See [deployment.md](./deployment.md) for detailed deployment instructions.
+
+**Quick Steps:**
+1. Deploy Convex: `npx convex deploy`
+2. Seed production DB: `npx convex run seed:seedData --prod`
+3. Deploy to Vercel with env var: `VITE_CONVEX_URL=https://cheerful-starfish-174.convex.cloud`
+
+## 📝 License
+
+MIT

@@ -1,3 +1,21 @@
+# Deployment
+.env.local
+.vercel
+
+# dependencies
+node_modules
+
+# production
+dist
+dist-ssr
+*.local
+
+# Vite
+.vite
+
+# Convex
+.convex
+
 # Logs
 logs
 *.log
@@ -6,11 +24,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
 
 # Editor directories and files
 .vscode/*

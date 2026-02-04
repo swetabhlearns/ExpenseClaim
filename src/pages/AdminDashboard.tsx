@@ -22,7 +22,7 @@ interface AdminDashboardProps {
 }
 
 export function AdminDashboard({ currentUser }: AdminDashboardProps) {
-    const targetStatus = Object.entries(STATUS_TO_ROLE).find(([_, role]) => role === currentUser.role)?.[0] || null;
+    const targetStatus = Object.entries(STATUS_TO_ROLE).find(([_, role]) => role === currentUser.role)?.[0] as "SUBMITTED" | "APPROVED_L1" | "APPROVED_L2" | "APPROVED_L3" | "DISBURSED" | "REJECTED" | undefined;
     const claims = useQuery(api.claims.getClaimsByStatus, targetStatus ? { status: targetStatus } : "skip");
     const [selectedClaim, setSelectedClaim] = useState<any | null>(null);
 

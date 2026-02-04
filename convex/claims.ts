@@ -21,7 +21,7 @@ export const getClaimsByUser = query({
 });
 
 export const getClaimsByStatus = query({
-    args: { status: v.string() },
+    args: { status: v.union(v.literal("SUBMITTED"), v.literal("APPROVED_L1"), v.literal("APPROVED_L2"), v.literal("APPROVED_L3"), v.literal("DISBURSED"), v.literal("REJECTED")) },
     handler: async (ctx, args) => {
         return await ctx.db
             .query("claims")
@@ -143,8 +143,10 @@ export const rejectClaim = mutation({
 });
 
 // Helper functions
-function getNextStatus(currentStatus: string): string | null {
-    const transitions: Record<string, string> = {
+type ClaimStatus = "SUBMITTED" | "APPROVED_L1" | "APPROVED_L2" | "APPROVED_L3" | "DISBURSED" | "REJECTED";
+
+function getNextStatus(currentStatus: ClaimStatus): ClaimStatus | null {
+    const transitions: Record<string, ClaimStatus> = {
         SUBMITTED: "APPROVED_L1",
         APPROVED_L1: "APPROVED_L2",
         APPROVED_L2: "APPROVED_L3",
