@@ -11,13 +11,22 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    include: ['tslib'],
-    exclude: ['convex'],
+    include: ['tslib', 'react', 'react-dom', 'convex/react'],
   },
   build: {
-    commonjsOptions: {
-      include: [/node_modules/],
-      transformMixedEsModules: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'react-vendor';
+            }
+            if (id.includes('convex')) {
+              return 'convex-vendor';
+            }
+          }
+        },
+      },
     },
   },
 })
