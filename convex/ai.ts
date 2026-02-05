@@ -65,6 +65,7 @@ Analyze this data and provide:
 Format your response in a clear, professional manner using bullet points. Be specific and use the actual numbers from the data. Keep it concise (max 200 words).`;
 
         // Call Groq API
+        // @ts-ignore - process.env is available in Convex runtime
         const apiKey = process.env.GROQ_API_KEY;
         if (!apiKey) {
             throw new Error("GROQ_API_KEY not configured");

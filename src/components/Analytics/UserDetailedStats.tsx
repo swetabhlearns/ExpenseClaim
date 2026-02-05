@@ -67,7 +67,7 @@ export function UserDetailedStats({ userId, startDate, endDate, onBack }: UserDe
                             <TrendingUp className="h-4 w-4 text-green-500" />
                         </CardHeader>
                         <CardContent>
-                            <div className="text-2xl font-bold">{formatCurrency(stats.totalAmount)}</div>
+                            <div className="text-2xl font-bold">{formatCurrency(stats.totalAmount || 0)}</div>
                         </CardContent>
                     </Card>
 
