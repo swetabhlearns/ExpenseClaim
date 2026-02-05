@@ -16,6 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Separator } from '@/components/ui/separator';
 import { ApprovalTimeline } from '@/components/Timeline/ApprovalTimeline';
 import { CheckCircle, XCircle } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface ApprovalDialogProps {
     claim: any | null;
@@ -39,7 +40,7 @@ export function ApprovalDialog({ claim, currentUser, open, onOpenChange }: Appro
 
     const handleApprove = async () => {
         if (!remarks.trim()) {
-            alert('Please provide remarks');
+            toast.error('Please provide remarks');
             return;
         }
 
@@ -53,9 +54,10 @@ export function ApprovalDialog({ claim, currentUser, open, onOpenChange }: Appro
             });
             setRemarks('');
             onOpenChange(false);
+            toast.success(`Claim approved successfully! Forwarded to next level.`);
         } catch (error) {
             console.error('Error approving claim:', error);
-            alert('Failed to approve claim. Please try again.');
+            toast.error('Failed to approve claim. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
@@ -63,7 +65,7 @@ export function ApprovalDialog({ claim, currentUser, open, onOpenChange }: Appro
 
     const handleReject = async () => {
         if (!remarks.trim()) {
-            alert('Please provide a reason for rejection');
+            toast.error('Please provide a reason for rejection');
             return;
         }
 
@@ -77,9 +79,10 @@ export function ApprovalDialog({ claim, currentUser, open, onOpenChange }: Appro
             });
             setRemarks('');
             onOpenChange(false);
+            toast.error('Claim rejected', { description: 'Employee will be notified.' });
         } catch (error) {
             console.error('Error rejecting claim:', error);
-            alert('Failed to reject claim. Please try again.');
+            toast.error('Failed to reject claim. Please try again.');
         } finally {
             setIsSubmitting(false);
         }

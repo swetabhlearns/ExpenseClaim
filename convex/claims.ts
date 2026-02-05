@@ -38,6 +38,13 @@ export const getClaim = query({
     },
 });
 
+export const getAllClaims = query({
+    args: {},
+    handler: async (ctx) => {
+        return await ctx.db.query("claims").order("desc").collect();
+    },
+});
+
 // Mutations
 export const createClaim = mutation({
     args: {

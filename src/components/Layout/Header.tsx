@@ -2,7 +2,7 @@ import type { Id } from '../../../convex/_generated/dataModel';
 import type { UserRole } from '@/types';
 import { ROLE_NAMES } from '@/types';
 import { Button } from '@/components/ui/button';
-import { FileText, LogOut } from 'lucide-react';
+import { FileText, LogOut, BarChart3, LayoutDashboard } from 'lucide-react';
 
 interface HeaderProps {
     currentUser: {
@@ -12,12 +12,16 @@ interface HeaderProps {
         role: UserRole;
     };
     setCurrentUserId: (userId: string | null) => void;
+    currentPage: 'dashboard' | 'super-dashboard';
+    setCurrentPage: (page: 'dashboard' | 'super-dashboard') => void;
 }
 
-export function Header({ currentUser, setCurrentUserId }: HeaderProps) {
+export function Header({ currentUser, setCurrentUserId, currentPage, setCurrentPage }: HeaderProps) {
     const handleLogout = () => {
         setCurrentUserId(null);
     };
+
+    const canAccessSuperDashboard = currentUser.role === 'L3_ADMIN';
 
     return (
         <header className="border-b bg-card/50 backdrop-blur supports-[backdrop-filter]:bg-card/30 sticky top-0 z-50">
@@ -34,8 +38,32 @@ export function Header({ currentUser, setCurrentUserId }: HeaderProps) {
                         </div>
                     </div>
 
-                    {/* User Info & Controls */}
+                    {/* Navigation & User Info */}
                     <div className="flex items-center gap-4">
+                        {/* Navigation Tabs (only for L3_ADMIN) */}
+                        {canAccessSuperDashboard && (
+                            <div className="flex items-center gap-2 border-r pr-4">
+                                <Button
+                                    variant={currentPage === 'dashboard' ? 'default' : 'ghost'}
+                                    size="sm"
+                                    onClick={() => setCurrentPage('dashboard')}
+                                    className="gap-2"
+                                >
+                                    <LayoutDashboard className="w-4 h-4" />
+                                    Dashboard
+                                </Button>
+                                <Button
+                                    variant={currentPage === 'super-dashboard' ? 'default' : 'ghost'}
+                                    size="sm"
+                                    onClick={() => setCurrentPage('super-dashboard')}
+                                    className="gap-2"
+                                >
+                                    <BarChart3 className="w-4 h-4" />
+                                    Analytics
+                                </Button>
+                            </div>
+                        )}
+
                         <div className="text-right">
                             <p className="text-sm font-medium">{currentUser.name}</p>
                             <p className="text-xs text-muted-foreground">{ROLE_NAMES[currentUser.role]}</p>

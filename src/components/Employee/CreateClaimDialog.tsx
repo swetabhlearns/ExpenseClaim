@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Plus } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface CreateClaimDialogProps {
     open: boolean;
@@ -20,7 +21,7 @@ export function CreateClaimDialog({ open, onOpenChange, onSubmit }: CreateClaimD
 
     const handleSubmit = async () => {
         if (!title || !amount || !date || !description) {
-            alert('Please fill in all fields');
+            toast.error('Please fill in all fields');
             return;
         }
 
@@ -37,9 +38,10 @@ export function CreateClaimDialog({ open, onOpenChange, onSubmit }: CreateClaimD
             setAmount('');
             setDate(new Date().toISOString().split('T')[0]);
             setDescription('');
+            toast.success('Claim submitted successfully!', { description: 'Your claim is now pending L1 approval.' });
         } catch (error) {
             console.error('Error creating claim:', error);
-            alert('Failed to create claim. Please try again.');
+            toast.error('Failed to create claim. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
